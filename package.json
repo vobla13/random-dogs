@@ -1,0 +1,27 @@
+{
+  "name": "random-dogs",
+  "version": "1.0.0",
+  "description": "Cutie dogs contest",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vobla13/random-dogs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vobla13/random-dogs/issues"
+  },
+  "homepage": "https://github.com/vobla13/random-dogs#readme",
+  "devDependencies": {
+    "@types/node": "^22.7.6",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5"
+  }
+}
