@@ -1,6 +1,7 @@
 # random-dogs
 Реализация тестового задания [Милые песики](https://github.com/StarWayMan/tech_interview_task/blob/main/README.md)
 Загрузка на Я.Диск случайной картинки собаки по ее породе. Если порода имеет подпороды, то картинка грузится для каждой подпороды.
+- [ревью исходного кода](docs/review.md)
 - [список пород и документация api dog.ceo](https://dog.ceo/dog-api/documentation/)
 - [документация api Я.Диск](https://yandex.ru/dev/disk/poligon/)
 
