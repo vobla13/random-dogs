@@ -11,7 +11,7 @@ const BASIC_HEADERS = {
 const YA_DISK_API = "https://cloud-api.yandex.net/";
 const DOG_CEO_API = "https://dog.ceo/";
 
-export class ApiClient {
+abstract class ApiClient {
   constructor(
     private readonly baseUrl: string,
     private readonly headers: Headers,
@@ -71,41 +71,31 @@ export class ApiClient {
   }
 }
 
-export class YaDiskClient {
-  baseUrl: string;
-  apiClient: ApiClient;
-  token: string;
-
+export class YaDiskClient extends ApiClient {
   constructor() {
     configDotenv();
-    this.baseUrl = YA_DISK_API;
-    this.token = process.env.YA_DISK_TOKEN || "";
-    this.apiClient = new ApiClient(this.baseUrl, BASIC_HEADERS, this.token);
+    super(YA_DISK_API, BASIC_HEADERS, process.env.YA_DISK_TOKEN || "");
   }
 
   public async createFolder(name: string) {
     const endpoint = "/v1/disk/resources/";
-    await this.apiClient.put(endpoint, { path: name });
+    await this.put(endpoint, { path: name });
   }
 
   public async uploadFile(file: FileToUpload) {
     const endpoint = "/v1/disk/resources/upload/";
-    await this.apiClient.post(endpoint, { path: `${file.path}/${file.name}`, url: file.source });
+    await this.post(endpoint, { path: `${file.path}/${file.name}`, url: file.source });
   }
 }
 
-export class DogCeoClient {
-  baseUrl: string;
-  apiClient: ApiClient;
-
+export class DogCeoClient extends ApiClient {
   constructor() {
-    this.baseUrl = DOG_CEO_API;
-    this.apiClient = new ApiClient(this.baseUrl, BASIC_HEADERS);
+    super(DOG_CEO_API, BASIC_HEADERS);
   }
 
   public async getSubBreeds(breed: string): Promise<string[]> {
     const endpoint = `/api/breed/${breed}/list`;
-    const response = await this.apiClient.get(endpoint);
+    const response = await this.get(endpoint);
     return response.message;
   }
 
@@ -114,7 +104,7 @@ export class DogCeoClient {
     const subBreedEndpoint = `/api/breed/${breed}/${subBreed}/images/random`;
 
     const endpoint = subBreed ? subBreedEndpoint : breedEndpoint;
-    const response = await this.apiClient.get(endpoint);
+    const response = await this.get(endpoint);
     return response.message;
   }
 }
